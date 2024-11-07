@@ -7,10 +7,7 @@ jobs:
     runs-on: ubuntu-latest  # 运行环境
 
     steps:
-    - uses: actions/upload-artifact@v3
-      with:
-        name: my-artifact
-        path: dist/
+    - uses: actions/checkout@v2  # 检出代码
 
     - name: Setup Node.js
       uses: actions/setup-node@v2
@@ -24,7 +21,7 @@ jobs:
       run: npm run-script generate-burndown  # 运行脚本生成燃尽图，需要你项目中有相应的脚本
 
     - name: Upload Burndown Chart
-      uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
-        name: burndown-chart
-        path: path/to/burndown-chart.png  # 上传燃尽图的路径
+        name: my-artifact
+        path: dist/
