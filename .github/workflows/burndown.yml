@@ -1,4 +1,4 @@
-name: Burndown Chart
+name: Build and Upload Burndown Chart
 
 on: [push]  # 触发条件，这里示例为每次代码推送时
 
@@ -7,12 +7,13 @@ jobs:
     runs-on: ubuntu-latest  # 运行环境
 
     steps:
-    - uses: actions/checkout@v2  # 检出代码
+    - name: Checkout repository
+      uses: actions/checkout@v3  # 检出代码，使用最新版本的动作
 
     - name: Setup Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: '14'  # 设置Node.js版本
+        node-version: '16'  # 设置Node.js版本
 
     - name: Install dependencies
       run: npm install  # 安装依赖
@@ -21,7 +22,7 @@ jobs:
       run: npm run-script generate-burndown  # 运行脚本生成燃尽图，需要你项目中有相应的脚本
 
     - name: Upload Burndown Chart
-    - uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3  # 使用最新版本的动作上传燃尽图
       with:
-        name: my-artifact
-        path: dist/
+        name: burndown-chart
+        path: path/to/burndown-chart.png  # 上传燃尽图的路径
